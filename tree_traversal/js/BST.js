@@ -12,7 +12,8 @@ class Node {
 class BinarySearchTree {
     constructor(rootValue) {
         this.root = new Node(rootValue);
-        this.parent="";
+        this.parent=""; // for tracking the parent of the current node for the CSV file
+        this.queue = [this.root]; //for breadth first traversal
     }
 
     insert(currentNode, newValue) {
@@ -42,7 +43,26 @@ class BinarySearchTree {
         this.insert(this.root, newValue);
     }
 
+    breadthFirstPrint() {
+        while (this.queue.length > 0) {
+            let currentNode = this.queue.shift();
+            console.log(currentNode.val);
+            if (currentNode.leftChild !== null) {
+                this.queue.push(currentNode.leftChild);
+            }
+            if (currentNode.rightChild !== null) {
+                this.queue.push(currentNode.rightChild);
+            }
+        }
+    }
     
+    preOrderPrint(currentNode) {
+        if (currentNode !== null) {
+            console.log(currentNode.val);
+            this.preOrderPrint(currentNode.leftChild);
+            this.preOrderPrint(currentNode.rightChild);
+        }
+    }
 
     inOrderPrint(currentNode) {
         if (currentNode !== null) {
