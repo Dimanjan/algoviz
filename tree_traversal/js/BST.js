@@ -1,8 +1,7 @@
-
 class Node {
     constructor(value) {
         this.val = value;
-        this.parent="";
+        this.parent = "";
         this.leftChild = null;
         this.rightChild = null;
     }
@@ -12,19 +11,19 @@ class Node {
 class BinarySearchTree {
     constructor(rootValue) {
         this.root = new Node(rootValue);
-        this.parent=""; // for tracking the parent of the current node for the CSV file
+        this.parent = ""; // for tracking the parent of the current node for the CSV file
         this.queue = [this.root]; //for breadth first traversal
     }
 
     insert(currentNode, newValue) {
         if (currentNode === null) {
             currentNode = new Node(newValue);
-            currentNode.parent=this.parent;
+            currentNode.parent = this.parent;
         } else if (newValue < currentNode.val) {
-        this.parent=currentNode.val;
+            this.parent = currentNode.val;
             currentNode.leftChild = this.insert(currentNode.leftChild, newValue);
         } else {
-        this.parent=currentNode.val;
+            this.parent = currentNode.val;
 
             currentNode.rightChild = this.insert(currentNode.rightChild, newValue);
         }
@@ -32,8 +31,8 @@ class BinarySearchTree {
     }
 
     insertBST(newValue) {
-        if(this.root==null){
-            this.root=new Node(newValue);
+        if (this.root == null) {
+            this.root = new Node(newValue);
             return;
         }
         this.insert(this.root, newValue);
@@ -50,7 +49,7 @@ class BinarySearchTree {
             }
         }
     }
-    
+
     preOrderPrint(currentNode) {
         if (currentNode !== null) {
             console.log(currentNode.val);
@@ -76,14 +75,14 @@ class BinarySearchTree {
     }
 
     forCSV(currentNode) {
-        if (currentNode!==null) {
-          if (currentNode.val==BST.root.val){
-            csvData+='num'+currentNode.val+','+currentNode.parent+'\n';
+        if (currentNode !== null) {
+            if (currentNode.val == BST.root.val) {
+                csvData += 'num' + currentNode.val + ',' + currentNode.parent + '\n';
 
-          } else {
-          csvData+='num'+currentNode.val+','+'num'+currentNode.parent+'\n';
+            } else {
+                csvData += 'num' + currentNode.val + ',' + 'num' + currentNode.parent + '\n';
 
-          }
+            }
             this.forCSV(currentNode.leftChild);
             this.forCSV(currentNode.rightChild);
 
@@ -92,13 +91,13 @@ class BinarySearchTree {
     }
 
 }
-let treeData1=[6,4,9,2,5,8,12,10,14];
+let treeData1 = [7, 4, 9, 2, 5, 8, 12, 10, 14];
 var BST = new BinarySearchTree(treeData1[0]);
 treeData1.splice(1).forEach(element => {
     BST.insertBST(element);
 });
 
-let csvData="child,parent\n";
+let csvData = "child,parent\n";
 BST.forCSV(BST.root);
 let stratify = d3.stratify()
     .id(d => d['child'])

@@ -4,7 +4,7 @@ async function breadthFirstPrint(tree) {
 
         await sleep(TIME.delay);
         console.log(currentNode.val);
-        setColor(currentNode.val,COLOR.finalised);
+        setColor(currentNode.val, COLOR.finalised);
 
         if (currentNode.leftChild !== null) {
             tree.queue.push(currentNode.leftChild);
@@ -17,10 +17,10 @@ async function breadthFirstPrint(tree) {
 
 async function preOrderPrint(currentNode) {
 
-    if (currentNode!==null) {
+    if (currentNode !== null) {
         await sleep(TIME.delay);
         console.log(currentNode.val);
-        setColor(currentNode.val,COLOR.finalised);
+        setColor(currentNode.val, COLOR.finalised);
 
         await preOrderPrint(currentNode.leftChild);
         await preOrderPrint(currentNode.rightChild);
@@ -29,12 +29,12 @@ async function preOrderPrint(currentNode) {
 }
 async function inOrderPrint(currentNode) {
 
-    if (currentNode!==null) {
+    if (currentNode !== null) {
         await inOrderPrint(currentNode.leftChild);
 
         await sleep(TIME.delay);
         console.log(currentNode.val);
-        setColor(currentNode.val,COLOR.finalised);
+        setColor(currentNode.val, COLOR.finalised);
 
         await inOrderPrint(currentNode.rightChild);
 
@@ -42,18 +42,18 @@ async function inOrderPrint(currentNode) {
 }
 async function postOrderPrint(currentNode) {
 
-    if (currentNode!==null) {
+    if (currentNode !== null) {
         await preOrderPrint(currentNode.leftChild);
         await preOrderPrint(currentNode.rightChild);
 
         await sleep(TIME.delay);
         console.log(currentNode.val);
-        setColor(currentNode.val,COLOR.finalised);
+        setColor(currentNode.val, COLOR.finalised);
     }
 }
-async function run(){
-    sleep(TIME.delay);
-    //await preOrderPrint(BST.root);
-    await breadthFirstPrint(BST)
+async function run() {
+    await sleep(TIME.delay * 3);
+    await postOrderPrint(BST.root);
+    //await breadthFirstPrint(BST)
 }
 run();
