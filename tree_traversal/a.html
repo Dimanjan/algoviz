@@ -18,21 +18,22 @@
 <div id="viz">
     <svg></svg>
 </div>
+<div id="click"></div>
+<script>
+  //click on click
+  var cl = document.getElementById("click");
+  cl.click()
+</script>
 <style>
 
 .node circle {
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 3px;
-}
-
-.node text {
-  font: 12px sans-serif;
+  stroke: rgba(2, 114, 45, 0.699);
+  stroke-width: 1px;
 }
 
 .link {
   fill: none;
-  stroke: #ccc;
+  stroke: rgb(109, 108, 108);
   stroke-width: 2px;
 }
 

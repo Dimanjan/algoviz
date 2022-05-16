@@ -18,15 +18,12 @@ class BinarySearchTree {
 
     insert(currentNode, newValue) {
         if (currentNode === null) {
-            
             currentNode = new Node(newValue);
             currentNode.parent=this.parent;
         } else if (newValue < currentNode.val) {
-        console.log(currentNode.val)
         this.parent=currentNode.val;
             currentNode.leftChild = this.insert(currentNode.leftChild, newValue);
         } else {
-        console.log(currentNode.val)
         this.parent=currentNode.val;
 
             currentNode.rightChild = this.insert(currentNode.rightChild, newValue);
@@ -35,7 +32,6 @@ class BinarySearchTree {
     }
 
     insertBST(newValue) {
-      console.log('inserting ' + newValue)
         if(this.root==null){
             this.root=new Node(newValue);
             return;
@@ -46,7 +42,6 @@ class BinarySearchTree {
     breadthFirstPrint() {
         while (this.queue.length > 0) {
             let currentNode = this.queue.shift();
-            console.log(currentNode.val);
             if (currentNode.leftChild !== null) {
                 this.queue.push(currentNode.leftChild);
             }
@@ -82,7 +77,6 @@ class BinarySearchTree {
 
     forCSV(currentNode) {
         if (currentNode!==null) {
-          console.log(currentNode.val,currentNode.parent);
           if (currentNode.val==BST.root.val){
             csvData+='num'+currentNode.val+','+currentNode.parent+'\n';
 
@@ -98,29 +92,11 @@ class BinarySearchTree {
     }
 
 }
-var BST = new BinarySearchTree(6);
-
-console.log("The root val for BST : ", BST.root.val)
-BST.insertBST(4);
-BST.insertBST(9);
-BST.insertBST(5);
-BST.insertBST(2);
-BST.insertBST(8);
-BST.insertBST(12);
-BST.insertBST(10);
-BST.insertBST(14);
-//many more such insertions
-
-// function to make random n insertBST
-
-function randomInsert(BST,n){
-
-    for(var i=0;i<n;i++){
-        var random=Math.floor(Math.random()*n*1000);
-        BST.insertBST(random);
-    }
-}
-//randomInsert(BST,10);
+let treeData1=[6,4,9,2,5,8,12,10,14];
+var BST = new BinarySearchTree(treeData1[0]);
+treeData1.splice(1).forEach(element => {
+    BST.insertBST(element);
+});
 
 let csvData="child,parent\n";
 BST.forCSV(BST.root);
@@ -128,5 +104,4 @@ let stratify = d3.stratify()
     .id(d => d['child'])
     .parentId(d => d['parent'])
 let links = d3.csvParse(csvData)
-console.log(links)
 let treeData = stratify(links) // this will be used to create tree using d3.tree()
